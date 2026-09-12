@@ -1,22 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
 @layer base {
-  :root {
-    --neo-yellow: #FFE600;
-    --neo-orange: #FF6B00;
-    --neo-teal: #0D9488;
-    --neo-cyan: #00D2FF;
-    --neo-pink: #FF5E7E;
-    --neo-purple: #A855F7;
-    --neo-lime: #84CC16;
-    --neo-bg: #FFFDF6;
-    --neo-dark: #121212;
-    --neo-black: #000000;
-    --neo-border: #000000;
-  }
-
   * {
     box-sizing: border-box;
   }
@@ -29,63 +15,44 @@
   body {
     margin: 0;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    background-color: var(--neo-bg);
-    color: var(--neo-dark);
+    background-color: #F8FAFC;
+    color: #0F172A;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Custom Selection styling */
   ::selection {
-    background-color: #FFE600;
-    color: #000000;
+    background-color: #0D9488;
+    color: #FFFFFF;
   }
 }
 
-/* Neo-Brutalism Custom Utility Classes */
-.neo-box {
+/* Modern Card & Surface Utilities */
+.surface-card {
   background-color: #ffffff;
-  border: 2.5px solid #000000;
-  box-shadow: 4px 4px 0px 0px #000000;
-  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
 }
 
-.neo-box-lg {
-  background-color: #ffffff;
-  border: 3px solid #000000;
-  box-shadow: 6px 6px 0px 0px #000000;
-  border-radius: 16px;
+.surface-card:hover {
+  border-color: rgba(203, 213, 225, 1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
 }
 
-.neo-box-sm {
-  background-color: #ffffff;
-  border: 2px solid #000000;
-  box-shadow: 2.5px 2.5px 0px 0px #000000;
-  border-radius: 8px;
+/* Subtle Glassmorphism */
+.glass-nav {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 }
 
-.neo-interactive {
-  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+/* Smooth Interactive Transitions */
+.interactive-card {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.neo-interactive:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px 0px #000000;
-}
-
-.neo-interactive:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px 0px #000000;
-}
-
-/* Retro Dot Pattern Background Accent */
-.bg-neo-dots {
-  background-image: radial-gradient(#000000 1.2px, transparent 1.2px);
-  background-size: 20px 20px;
-}
-
-.bg-neo-grid {
-  background-size: 30px 30px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+.interactive-card:hover {
+  transform: translateY(-2px);
 }

@@ -29,10 +29,10 @@ const WorkerCard = ({
     (worker.distanceKm !== undefined ? `${worker.distanceKm} km away` : null);
 
   return (
-    <Card hover={hover} className={`flex flex-col justify-between bg-white border-2 border-black shadow-neo ${className}`}>
+    <Card hover={hover} className={`flex flex-col justify-between bg-white border border-slate-200/90 shadow-xs hover:border-teal-300 hover:shadow-md transition-all ${className}`}>
       <CardContent className="p-5">
-        <div className="flex items-start gap-4">
-          {/* Avatar with hard border */}
+        <div className="flex items-start gap-3.5">
+          {/* Avatar */}
           <div className="relative shrink-0">
             <Avatar
               src={worker.avatar}
@@ -44,12 +44,12 @@ const WorkerCard = ({
           </div>
 
           <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between gap-2">
-              <h4 className="text-base font-extrabold text-black truncate font-display">
+            <div className="flex items-center justify-between gap-1.5">
+              <h4 className="text-sm font-bold text-slate-900 truncate">
                 {worker.name}
               </h4>
               {worker.isVerified && (
-                <Badge variant="success" size="sm" shadow>
+                <Badge variant="success" size="sm">
                   ✓ Verified
                 </Badge>
               )}
@@ -57,46 +57,46 @@ const WorkerCard = ({
 
             {/* Cooperative Name */}
             {worker.cooperative && (
-              <p className="text-xs text-slate-700 font-bold truncate mt-0.5">
+              <p className="text-xs text-slate-500 font-medium truncate mt-0.5">
                 🏛️ {worker.cooperative}
               </p>
             )}
 
             {/* Rating and Distance */}
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-2 text-xs">
-              <span className="inline-flex items-center gap-1 font-extrabold bg-yellow-300 border border-black px-2 py-0.5 rounded-md shadow-neo-xs text-black">
-                <span>★</span>
+            <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
+              <span className="inline-flex items-center gap-1 font-semibold text-slate-800 bg-amber-50 border border-amber-200/60 px-2 py-0.5 rounded-md">
+                <span className="text-amber-500">★</span>
                 <span>{worker.rating ? worker.rating.toFixed(1) : '5.0'}</span>
                 {worker.reviewCount ? (
-                  <span className="font-semibold text-slate-800">({worker.reviewCount})</span>
+                  <span className="font-normal text-slate-400">({worker.reviewCount})</span>
                 ) : null}
               </span>
 
               {distanceText && (
-                <span className="inline-flex items-center gap-1 font-bold text-slate-800 bg-slate-100 border border-black px-2 py-0.5 rounded-md">
+                <span className="inline-flex items-center gap-1 font-medium text-slate-600 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-md">
                   📍 {distanceText}
                 </span>
               )}
 
               {worker.hourlyRate && (
-                <span className="font-extrabold bg-teal-100 text-teal-950 border border-black px-2 py-0.5 rounded-md">
-                  ₹{worker.hourlyRate}<span className="text-slate-600 font-normal">/hr</span>
+                <span className="font-bold text-teal-700 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded-md">
+                  ₹{worker.hourlyRate}<span className="text-slate-500 font-normal">/hr</span>
                 </span>
               )}
             </div>
 
             {/* Emergency Available indicator */}
             {worker.emergencyAvailable && (
-              <div className="mt-2.5">
-                <Badge variant="danger" size="sm" dot shadow>
-                  ⚡ Emergency Dispatch Ready
+              <div className="mt-2">
+                <Badge variant="danger" size="sm" dot>
+                  ⚡ Emergency Dispatch
                 </Badge>
               </div>
             )}
 
             {/* Skill Tags */}
             {Array.isArray(worker.skills) && worker.skills.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-3.5">
+              <div className="flex flex-wrap gap-1.5 mt-3">
                 {worker.skills.slice(0, 4).map((skill, idx) => (
                   <Badge
                     key={idx}
@@ -118,16 +118,16 @@ const WorkerCard = ({
       </CardContent>
 
       {/* Card Footer Actions */}
-      <CardFooter className="px-5 py-3.5 bg-yellow-50/60 border-t-2 border-black flex items-center justify-between">
-        <div className="text-xs font-bold text-slate-800">
-          <span className="text-black font-extrabold">{worker.totalJobs || 0}</span> jobs done
+      <CardFooter className="px-5 py-3 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between">
+        <div className="text-xs text-slate-500">
+          <span className="font-semibold text-slate-800">{worker.totalJobs || 0}</span> jobs completed
         </div>
 
         <div className="flex items-center gap-2">
           {onViewProfile && (
             <Button
               variant="outline"
-              size="sm"
+              size="xs"
               onClick={() => onViewProfile(worker)}
             >
               Profile
@@ -135,11 +135,11 @@ const WorkerCard = ({
           )}
           {onBook && (
             <Button
-              variant="secondary"
-              size="sm"
+              variant="primary"
+              size="xs"
               onClick={() => onBook(worker)}
             >
-              Book Now ⚡
+              Book Now
             </Button>
           )}
         </div>

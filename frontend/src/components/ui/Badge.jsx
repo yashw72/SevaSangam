@@ -11,57 +11,56 @@ const Badge = ({
   className = '',
 }) => {
   const variants = {
-    // Primary: Neo Teal
-    primary: 'bg-teal-300 text-teal-950 border-black',
-    // Secondary: Electric Yellow
-    secondary: 'bg-yellow-300 text-black border-black',
-    // Accent / Cyan
-    accent: 'bg-cyan-300 text-cyan-950 border-black',
-    // Saffron / Orange
-    orange: 'bg-orange-300 text-orange-950 border-black',
-    // Success / Lime
-    success: 'bg-lime-300 text-lime-950 border-black',
-    // Warning / Amber
-    warning: 'bg-amber-300 text-amber-950 border-black',
-    // Danger / Emergency / Pink
-    danger: 'bg-rose-400 text-white border-black',
-    // Purple
-    purple: 'bg-purple-300 text-purple-950 border-black',
-    // Default Clean White
-    default: 'bg-white text-black border-black',
+    // Primary: Elegant Teal
+    primary: 'bg-teal-50 text-teal-700 border-teal-200/80',
+    // Secondary: Slate
+    secondary: 'bg-slate-100 text-slate-700 border-slate-200',
+    // Accent: Sky Blue
+    accent: 'bg-blue-50 text-blue-700 border-blue-200/80',
+    // Orange: Amber / Saffron
+    orange: 'bg-amber-50 text-amber-700 border-amber-200/80',
+    // Success: Emerald
+    success: 'bg-emerald-50 text-emerald-700 border-emerald-200/80',
+    // Warning: Yellow / Amber
+    warning: 'bg-yellow-50 text-yellow-800 border-yellow-200/80',
+    // Danger: Rose
+    danger: 'bg-rose-50 text-rose-700 border-rose-200/80',
+    // Purple: Violet
+    purple: 'bg-purple-50 text-purple-700 border-purple-200/80',
+    // Default Clean Gray
+    default: 'bg-slate-50 text-slate-700 border-slate-200',
   };
 
   const dotColors = {
-    primary: 'bg-teal-900',
-    secondary: 'bg-black',
-    accent: 'bg-cyan-900',
-    orange: 'bg-orange-900',
-    success: 'bg-lime-900',
-    warning: 'bg-amber-900',
-    danger: 'bg-white',
-    purple: 'bg-purple-900',
-    default: 'bg-black',
+    primary: 'bg-teal-500',
+    secondary: 'bg-slate-500',
+    accent: 'bg-blue-500',
+    orange: 'bg-amber-500',
+    success: 'bg-emerald-500',
+    warning: 'bg-yellow-500',
+    danger: 'bg-rose-500',
+    purple: 'bg-purple-500',
+    default: 'bg-slate-500',
   };
 
   const sizes = {
-    sm: 'px-2 py-0.5 text-[11px] font-bold',
-    md: 'px-3 py-1 text-xs font-bold',
-    lg: 'px-4 py-1.5 text-sm font-extrabold',
+    sm: 'px-2 py-0.5 text-[11px] font-medium',
+    md: 'px-2.5 py-1 text-xs font-medium',
+    lg: 'px-3 py-1.5 text-sm font-semibold',
   };
 
   return (
     <span
       className={`
-        inline-flex items-center gap-1.5 tracking-tight rounded-full border-2
+        inline-flex items-center gap-1.5 tracking-tight rounded-full border
         ${variants[variant] || variants.default}
         ${sizes[size] || sizes.md}
-        ${shadow ? 'shadow-neo-xs' : ''}
         ${className}
       `}
     >
       {dot && (
         <span
-          className={`w-2 h-2 rounded-full border border-black shrink-0 ${dotColors[variant] || dotColors.default}`}
+          className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotColors[variant] || dotColors.default}`}
         />
       )}
       <span>{children}</span>

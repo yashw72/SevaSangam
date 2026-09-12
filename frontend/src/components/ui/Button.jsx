@@ -17,49 +17,43 @@ const Button = ({
   ...props
 }) => {
   const baseStyles =
-    'inline-flex items-center justify-center font-bold tracking-tight rounded-xl border-2 border-black select-none cursor-pointer transition-all duration-150 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none';
+    'inline-flex items-center justify-center font-medium tracking-normal rounded-xl select-none cursor-pointer transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none active:scale-[0.98]';
 
   const variants = {
-    // Primary: Neo Teal
+    // Primary: Elegant Emerald/Teal
     primary:
-      'bg-teal-500 text-white shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-teal-600',
-    // Secondary: Electric Neo Yellow (Signature punch)
+      'bg-teal-600 text-white shadow-sm hover:bg-teal-700 hover:shadow focus:ring-teal-500',
+    // Secondary: Dark Slate
     secondary:
-      'bg-yellow-400 text-black shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-yellow-300',
-    // Orange / Saffron Energy
+      'bg-slate-900 text-white shadow-sm hover:bg-slate-800 hover:shadow focus:ring-slate-900',
+    // Orange / Warm accent
     orange:
-      'bg-orange-500 text-white shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-orange-600',
-    // Accent / Electric Sky
+      'bg-amber-600 text-white shadow-sm hover:bg-amber-700 hover:shadow focus:ring-amber-500',
+    // Accent / Blue
     accent:
-      'bg-cyan-400 text-black shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-cyan-300',
-    // Vivid Pink
-    pink:
-      'bg-rose-400 text-black shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-rose-300',
-    // Electric Purple
-    purple:
-      'bg-purple-500 text-white shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-purple-600',
-    // Outline White
+      'bg-blue-600 text-white shadow-sm hover:bg-blue-700 hover:shadow focus:ring-blue-500',
+    // Outline / Clean white
     outline:
-      'bg-white text-black shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-slate-50',
+      'bg-white text-slate-700 border border-slate-200 shadow-xs hover:bg-slate-50 hover:border-slate-300 hover:text-slate-900 focus:ring-slate-300',
     'outline-primary':
-      'bg-teal-50 text-teal-950 shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-teal-100',
+      'bg-teal-50/50 text-teal-700 border border-teal-200 hover:bg-teal-100/70 hover:border-teal-300 focus:ring-teal-400',
     // Ghost
     ghost:
-      'border-transparent shadow-none hover:border-black hover:shadow-neo-sm hover:bg-yellow-50 text-black',
+      'bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-200',
     // Success State
     success:
-      'bg-lime-400 text-black shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-lime-300',
+      'bg-emerald-600 text-white shadow-sm hover:bg-emerald-700 hover:shadow focus:ring-emerald-500',
     // Destructive Actions
     danger:
-      'bg-rose-500 text-white shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg hover:bg-rose-600',
+      'bg-rose-600 text-white shadow-sm hover:bg-rose-700 hover:shadow focus:ring-rose-500',
   };
 
   const sizes = {
-    xs: 'px-3 py-1 text-xs gap-1.5 rounded-lg border-[1.5px]',
+    xs: 'px-2.5 py-1 text-xs gap-1 rounded-lg',
     sm: 'px-3.5 py-1.5 text-xs gap-1.5 rounded-lg',
-    md: 'px-5 py-2.5 text-sm gap-2',
-    lg: 'px-6 py-3.5 text-base gap-2.5',
-    xl: 'px-8 py-4 text-lg gap-3 rounded-2xl border-[3px]',
+    md: 'px-4 py-2 text-sm gap-2',
+    lg: 'px-5 py-2.5 text-base gap-2',
+    xl: 'px-6 py-3.5 text-base gap-2.5 rounded-xl font-semibold',
   };
 
   return (
