@@ -78,9 +78,23 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     try {
       const response = await authApi.login(credentials);
-      let { user: loggedInUser, token } = response.data || response;
+      const data = response.data || response;
+      
+      let loggedInUser = data.user;
+      let token = data.token || data.access_token;
 
-      if (loggedInUser && credentials?.role) {
+      // Handle FastAPI backend direct response format
+      if (!loggedInUser && data.access_token) {
+        loggedInUser = {
+          id: data.user_id,
+          name: data.full_name || 'Member',
+          role: data.role || credentials?.role || 'customer',
+          email: credentials?.email,
+          language: data.preferred_language || 'en',
+        };
+      }
+
+      if (loggedInUser && credentials?.role && !loggedInUser.role) {
         loggedInUser = { ...loggedInUser, role: credentials.role };
       }
 
@@ -105,7 +119,21 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     try {
       const response = await authApi.register(userData);
-      const { user: newUser, token } = response.data || response;
+      const data = response.data || response;
+
+      let newUser = data.user;
+      let token = data.token || data.access_token;
+
+      // Handle FastAPI backend direct response format
+      if (!newUser && (data.id || data.user_id || data.access_token)) {
+        newUser = {
+          id: data.id || data.user_id,
+          name: data.full_name || userData?.full_name || userData?.name,
+          role: data.role || userData?.role || 'customer',
+          email: data.email || userData?.email,
+          phone: data.phone || userData?.phone,
+        };
+      }
 
       persistSession(token, newUser);
       setUser(newUser);

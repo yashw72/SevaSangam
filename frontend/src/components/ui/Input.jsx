@@ -26,15 +26,15 @@ const Input = ({
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-bold text-black mb-1.5"
+          className="block text-xs font-semibold text-slate-700 mb-1.5"
         >
-          {label} {required && <span className="text-rose-600 font-extrabold">*</span>}
+          {label} {required && <span className="text-rose-500">*</span>}
         </label>
       )}
 
       <div className="relative">
         {leftIcon && (
-          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-700">
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
             {leftIcon}
           </div>
         )}
@@ -49,16 +49,16 @@ const Input = ({
           disabled={disabled}
           required={required}
           className={`
-            w-full rounded-xl border-2 text-sm font-medium transition-all duration-150
-            focus:outline-none focus:shadow-neo focus:-translate-x-0.5 focus:-translate-y-0.5
-            disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed
-            ${leftIcon ? 'pl-11' : 'pl-4'}
-            ${rightIcon ? 'pr-11' : 'pr-4'}
-            py-3 bg-white text-black
+            w-full rounded-xl border text-sm font-normal transition-colors duration-150
+            focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600
+            disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed
+            ${leftIcon ? 'pl-10' : 'pl-3.5'}
+            ${rightIcon ? 'pr-10' : 'pr-3.5'}
+            py-2.5 bg-white text-slate-900 placeholder-slate-400
             ${
               error
-                ? 'border-rose-600 bg-rose-50/40 focus:border-rose-600 text-rose-950 shadow-neo-xs'
-                : 'border-black hover:border-black focus:border-black shadow-neo-sm'
+                ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-rose-500/20 text-rose-900'
+                : 'border-slate-200 hover:border-slate-300'
             }
             ${className}
           `}

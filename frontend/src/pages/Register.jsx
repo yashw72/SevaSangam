@@ -45,46 +45,46 @@ const Register = () => {
   return (
     <div className="w-full">
       <div className="text-center mb-6">
-        <Badge variant="primary" size="sm" shadow className="mb-2">
-          🏛️ Join SevaSangam Guild
+        <Badge variant="primary" size="sm" className="mb-2">
+          🏛️ Cooperative Membership
         </Badge>
-        <h2 className="text-2xl font-extrabold text-black font-display tracking-tight">
-          Create Your Account
+        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+          Create an Account
         </h2>
-        <p className="text-xs font-bold text-slate-700 mt-1">
-          Cooperative-powered digital service network
+        <p className="text-xs text-slate-500 mt-1">
+          Join the fair and verified digital trade network
         </p>
       </div>
 
       {/* Role Selection Tabs */}
-      <div className="flex rounded-2xl bg-yellow-100/70 p-1.5 border-2 border-black mb-6 gap-2">
+      <div className="flex rounded-xl bg-slate-100 p-1 mb-6 border border-slate-200">
         <button
           type="button"
           onClick={() => setRole('customer')}
-          className={`flex-1 py-2.5 text-xs font-extrabold rounded-xl border-2 transition-all cursor-pointer ${
+          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
             role === 'customer'
-              ? 'bg-yellow-300 text-black border-black shadow-neo-xs -translate-x-0.5 -translate-y-0.5'
-              : 'border-transparent text-slate-800 hover:bg-white'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
         >
-          👤 Need Services (Customer)
+          👤 Customer
         </button>
         <button
           type="button"
           onClick={() => setRole('worker')}
-          className={`flex-1 py-2.5 text-xs font-extrabold rounded-xl border-2 transition-all cursor-pointer ${
+          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
             role === 'worker'
-              ? 'bg-teal-300 text-black border-black shadow-neo-xs -translate-x-0.5 -translate-y-0.5'
-              : 'border-transparent text-slate-800 hover:bg-white'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
         >
-          👷 Provide Services (Worker)
+          👷 Trade Worker
         </button>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <div className="p-3 bg-rose-100 border-2 border-rose-600 rounded-xl text-xs font-bold text-rose-950 shadow-neo-xs">
+          <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs font-medium text-rose-700">
             ⚠️ {error}
           </div>
         )}
@@ -107,7 +107,7 @@ const Register = () => {
         />
 
         <Input
-          label="Mobile Phone Number"
+          label="Phone Number"
           type="tel"
           placeholder="+91 9876543210"
           value={phone}
@@ -117,17 +117,17 @@ const Register = () => {
 
         {role === 'worker' && (
           <Input
-            label="Labour Cooperative / Federation Name"
+            label="Labour Cooperative Society Name"
             placeholder="e.g. Maharashtra Labour Cooperative Federation"
             value={cooperative}
             onChange={(e) => setCooperative(e.target.value)}
-            helperText="Registered cooperative society ensuring collective social security"
+            helperText="Your registered cooperative society for welfare benefits"
             required
           />
         )}
 
         <Input
-          label="Password"
+          label="Create Password"
           type="password"
           placeholder="••••••••"
           value={password}
@@ -135,14 +135,14 @@ const Register = () => {
           required
         />
 
-        <Button type="submit" variant="secondary" fullWidth size="lg" disabled={loading} className="font-extrabold">
-          {loading ? 'Creating Account...' : `Register as ${role === 'customer' ? 'Customer' : 'Cooperative Worker ⚡'}`}
+        <Button type="submit" variant="primary" fullWidth size="lg" disabled={loading} className="font-semibold mt-2">
+          {loading ? 'Creating Account...' : `Register as ${role === 'customer' ? 'Customer' : 'Trade Worker'}`}
         </Button>
       </form>
 
-      <div className="mt-6 text-center text-xs font-bold text-slate-800">
+      <div className="mt-6 text-center text-xs text-slate-500">
         Already have an account?{' '}
-        <Link to="/login" className="font-extrabold text-teal-700 hover:underline">
+        <Link to="/login" className="font-semibold text-teal-600 hover:underline">
           Sign In
         </Link>
       </div>
