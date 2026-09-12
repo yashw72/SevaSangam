@@ -357,19 +357,24 @@ const apiClient = {
       return dispatchMockRequest('GET', endpoint, {}, params);
     }
 
-    const url = new URL(`${API_BASE_URL}${endpoint}`);
-    Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        url.searchParams.append(key, String(value));
-      }
-    });
+    try {
+      const url = new URL(`${API_BASE_URL}${endpoint}`);
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          url.searchParams.append(key, String(value));
+        }
+      });
 
-    const response = await fetch(url.toString(), {
-      method: 'GET',
-      headers: buildHeaders(),
-    });
+      const response = await fetch(url.toString(), {
+        method: 'GET',
+        headers: buildHeaders(),
+      });
 
-    return handleResponse(response);
+      return await handleResponse(response);
+    } catch (err) {
+      console.warn(`[apiClient] Backend fetch GET ${endpoint} unavailable, falling back to mock:`, err.message);
+      return dispatchMockRequest('GET', endpoint, {}, params);
+    }
   },
 
   /**
@@ -382,13 +387,18 @@ const apiClient = {
       return dispatchMockRequest('POST', endpoint, data);
     }
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      method: 'POST',
-      headers: buildHeaders(),
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+        method: 'POST',
+        headers: buildHeaders(),
+        body: JSON.stringify(data),
+      });
 
-    return handleResponse(response);
+      return await handleResponse(response);
+    } catch (err) {
+      console.warn(`[apiClient] Backend fetch POST ${endpoint} unavailable, falling back to mock:`, err.message);
+      return dispatchMockRequest('POST', endpoint, data);
+    }
   },
 
   /**
@@ -401,13 +411,18 @@ const apiClient = {
       return dispatchMockRequest('PUT', endpoint, data);
     }
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      method: 'PUT',
-      headers: buildHeaders(),
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+        method: 'PUT',
+        headers: buildHeaders(),
+        body: JSON.stringify(data),
+      });
 
-    return handleResponse(response);
+      return await handleResponse(response);
+    } catch (err) {
+      console.warn(`[apiClient] Backend fetch PUT ${endpoint} unavailable, falling back to mock:`, err.message);
+      return dispatchMockRequest('PUT', endpoint, data);
+    }
   },
 
   /**
@@ -420,13 +435,18 @@ const apiClient = {
       return dispatchMockRequest('PATCH', endpoint, data);
     }
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      method: 'PATCH',
-      headers: buildHeaders(),
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+        method: 'PATCH',
+        headers: buildHeaders(),
+        body: JSON.stringify(data),
+      });
 
-    return handleResponse(response);
+      return await handleResponse(response);
+    } catch (err) {
+      console.warn(`[apiClient] Backend fetch PATCH ${endpoint} unavailable, falling back to mock:`, err.message);
+      return dispatchMockRequest('PATCH', endpoint, data);
+    }
   },
 
   /**
@@ -438,12 +458,17 @@ const apiClient = {
       return dispatchMockRequest('DELETE', endpoint);
     }
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      method: 'DELETE',
-      headers: buildHeaders(),
-    });
+    try {
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+        method: 'DELETE',
+        headers: buildHeaders(),
+      });
 
-    return handleResponse(response);
+      return await handleResponse(response);
+    } catch (err) {
+      console.warn(`[apiClient] Backend fetch DELETE ${endpoint} unavailable, falling back to mock:`, err.message);
+      return dispatchMockRequest('DELETE', endpoint);
+    }
   },
 
   /**
@@ -456,19 +481,24 @@ const apiClient = {
       return dispatchMockRequest('UPLOAD', endpoint, formData);
     }
 
-    const token = getAuthToken();
-    const headers = {};
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
+    try {
+      const token = getAuthToken();
+      const headers = {};
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+
+      return await handleResponse(response);
+    } catch (err) {
+      console.warn(`[apiClient] Backend upload ${endpoint} unavailable, falling back to mock:`, err.message);
+      return dispatchMockRequest('UPLOAD', endpoint, formData);
     }
-
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      method: 'POST',
-      headers,
-      body: formData,
-    });
-
-    return handleResponse(response);
   },
 
   // ==========================================================================

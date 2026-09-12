@@ -16,7 +16,37 @@ from datetime import date, timedelta
 from typing import List, Optional
 
 import numpy as np
-from sklearn.linear_model import Ridge
+
+try:
+    from sklearn.linear_model import Ridge
+except ImportError:
+    class Ridge:
+        """Fallback Ridge implementation using numpy least squares."""
+        def __init__(self, alpha: float = 1.0) -> None:
+            self.alpha = alpha
+            self.coef_ = None
+            self.intercept_ = 0.0
+
+        def fit(self, X: np.ndarray, y: np.ndarray) -> "Ridge":
+            if X.shape[0] == 0:
+                return self
+            # Add bias column
+            X_b = np.c_[np.ones((X.shape[0], 1)), X]
+            I = np.eye(X_b.shape[1])
+            I[0, 0] = 0.0
+            try:
+                theta = np.linalg.solve(X_b.T.dot(X_b) + self.alpha * I, X_b.T.dot(y))
+                self.intercept_ = float(theta[0])
+                self.coef_ = theta[1:]
+            except Exception:
+                self.intercept_ = float(np.mean(y)) if len(y) > 0 else 0.0
+                self.coef_ = np.zeros(X.shape[1])
+            return self
+
+        def predict(self, X: np.ndarray) -> np.ndarray:
+            if self.coef_ is None:
+                return np.full((X.shape[0],), self.intercept_)
+            return X.dot(self.coef_) + self.intercept_
 
 
 # ---------------------------------------------------------------------------
